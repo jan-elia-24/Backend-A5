@@ -17,4 +17,9 @@ app.get('/moviesPage.html', async (request, response) => {
     response.send(text);
 });
 
+app.use('/static', express.static('./static'));
+
+app.use('/script', express.static('./script'));
+
+
 app.listen(5080);
