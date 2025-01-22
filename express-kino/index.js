@@ -10,4 +10,11 @@ app.get('/', async (request, response) => {
     response.send(text);
 });
 
+app.get('/moviesPage.html', async (request, response) => {
+    const buf = await fs.readFile('./content/moviesPage.html');
+    const text = buf.toString();
+
+    response.send(text);
+});
+
 app.listen(5080);
