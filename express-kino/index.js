@@ -3,18 +3,29 @@ import fs from 'fs/promises';
 
 const app = express();
 
-app.get('/', async (request, response) => {
-    const buf = await fs.readFile('./content/index.html');
-    const text = buf.toString();
+async function renderPage(response, page) {
+    try {
+        const contentBuf = await fs.readFile(`./content/${page}.html`);
+        const contentText = contentBuf.toString();
 
-    response.send(text);
+        const templateBuf = await fs.readFile('./templates/main.html');
+        const templateText = templateBuf.toString();
+
+        const outputHtml = templateText.replace('Hello', contentText);
+
+        response.send(outputHtml);
+    } catch (error) {
+        console.error(`Error rendering page "${page}":`, error);
+        response.status(500).send('An error occurred while rendering the page.');
+    }
+}
+
+app.get('/', (request, response) => {
+    renderPage(response, 'index');
 });
 
-app.get('/moviesPage.html', async (request, response) => {
-    const buf = await fs.readFile('./content/moviesPage.html');
-    const text = buf.toString();
-
-    response.send(text);
+app.get('/moviesPage', async (request, response) => {
+    renderPage(response, 'moviesPage');
 });
 
 app.use('/static', express.static('./static'));
