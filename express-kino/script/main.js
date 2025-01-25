@@ -1,3 +1,4 @@
+/*
 const API_BASE = 'https://plankton-app-xhkom.ondigitalocean.app/api';
 
 export async function loadMovies() {
