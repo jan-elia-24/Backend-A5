@@ -3,7 +3,6 @@ import { engine } from "express-handlebars";
 import fetch from "node-fetch"; 
 import renderPage from './lib/renderPage.js';
 
-
 const app = express();
 app.engine("handlebars", engine());
 app.set("view engine", "handlebars");
@@ -38,6 +37,7 @@ app.get("/", async (req, res) => {
     res.render("index", { movies });
 });
 
+// Route for All Movies Page with Dynamic Styling
 app.get('/allMovies', async (req, res) => {
     try {
         const response = await fetch("https://plankton-app-xhkom.ondigitalocean.app/api/movies");
@@ -49,19 +49,22 @@ app.get('/allMovies', async (req, res) => {
     }
 });
 
-
 // Route for Individual Movie Page (Displays full movie details)
 app.get("/movies/:id", async (req, res) => {
     try {
         const movieId = req.params.id;
         const response = await fetch(`https://plankton-app-xhkom.ondigitalocean.app/api/movies/${movieId}`);
         const payload = await response.json();
+        
+        console.log("Fetched Movie Data:", JSON.stringify(payload, null, 2)); 
+        
         res.render("movie", { movie: payload.data });
     } catch (error) {
         console.error("Error fetching movie details:", error);
         res.status(404).send("Movie not found.");
     }
 });
+
 
 // Start Server
 app.listen(5080, () => {

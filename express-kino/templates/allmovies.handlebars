@@ -1,10 +1,38 @@
-<h1>All Movies</h1>
-<ul>
-    {{#each movies}}
-    <li>
-        <a href="/movies/{{this.id}}">
-            {{this.attributes.title}}
-        </a>
-    </li>
-    {{/each}}
-</ul>
+<div>
+    <h2 class="topTitle">All Movies</h2>
+    <ul id="moviesList">
+        {{#each movies}}
+        <li>
+            <a href="/movies/{{this.id}}">
+                {{this.attributes.title}}
+            </a>
+        </li>
+        {{/each}}
+    </ul>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const movieList = document.querySelector("#moviesList");
+        
+        // Apply styles to the UL
+        movieList.style.listStyle = "none";
+        movieList.style.padding = "20px";
+        movieList.style.margin = "20px";
+        movieList.style.backgroundColor = "#1a1a1a";
+        movieList.style.borderRadius = "10px";
+
+        // Style each LI
+        document.querySelectorAll("#moviesList li").forEach(li => {
+            li.style.padding = "10px 0";
+            li.style.fontSize = "20px";
+            li.style.color = "white";
+            li.style.cursor = "pointer";
+            li.style.transition = "color 0.3s";
+
+            // Add hover effect
+            li.addEventListener("mouseover", () => li.style.color = "#ffb509");
+            li.addEventListener("mouseout", () => li.style.color = "white");
+        });
+    });
+</script>
