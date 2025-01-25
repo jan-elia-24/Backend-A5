@@ -37,48 +37,37 @@
    </header>
 
    <main>
-      <section class="upperSection">
-         <figure class="cinemaSeats">
-            <img class="picUnderNav" src="static/seats.png" alt="Image under the navbar not fount!" />
-         </figure>
-         <button type="button" class="allMoviesBtn">Show all movies</button>
-         <h2 class="topTitle">Top three movies</h2>
-         <hr class="lineX" />
-         <figure class="topThree">
-            <div class="containerLeft">
-            </div>
-            <!--smaller image top-->
-            <div class="containerRight">
-               <div class="movieCardTop">
-               </div>
-               <!--smaller image down-->
-               <div class="movieCardBottom">
-               </div>
-            </div>
-         </figure>
-      </section>
-      <section class="mid">
-         <section class="filterSection">
-            <form>
-               <!--
-         Here goes the filter menu.
-         -->
-            </form>
-         </section>
+      <div>
+         <h2 class="topTitle">All Movies</h2>
          <ul>
-            {{#each movies }}
+            {{#each movies}}
             <li>
-               <a href="/movies/{{ this.id }}">
-                  {{ this.attributes.title }}
+               <a href="/movies/{{this.id}}">
+                  {{this.attributes.title}}
                </a>
             </li>
             {{/each}}
          </ul>
+      </div>
+      <section class="upperSection">
+         <figure class="cinemaSeats">
+            <img class="picUnderNav" src="static/seats.png" alt="Image under the navbar not fount!" />
+         </figure>
+         <section>
+            <button type="button" class="allMoviesBtn" onclick="window.location.href='/allmovies'">
+               Show all movies
+            </button>
+         </section>
+
+
          <section class="extraSection">
             <!-- here goes all the cards like present card 4DX!...-->
          </section>
       </section>
       <section class="lowerSection">
+         <figure class="upComingMovies">
+            <!--up coming movies here-->
+         </figure>
          <figure class="upComingMovies">
             <!--up coming movies here-->
          </figure>
